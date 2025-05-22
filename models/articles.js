@@ -1,24 +1,34 @@
-const articles = [{
-    id: 1,
-    title: 'Article 1',
-    content: 'This is the content of article 1.',
-    published: '20/05/2025',
-    author: 'mati'
-},
-{
-    id: 2,
-    title: 'Article 2',
-    content: 'This is the content of article 2!.',
-    published: '20/05/2025',
-    author: 'mati'
+const articles = []
+let idCounter = 0
+
+const getAllArticles = () => articles
+
+const getArticle = (id) => articles.find(a => a.id === id)
+
+
+const createArticle = (title, content) => {
+    const newArticle = { id: ++idCounter, title, content }
+    articles.push(newArticle)
+    return newArticle
 }
-
-]
-
-const getArticle = (id) => {
-    return articles.filter(article => article.id == id)[0]
+const updateArticle = (id, title, content) => {
+    const article = getArticle(id)
+    if (!article) return null
+    article.title = title
+    article.content = content
+    return article
 }
-
+const deleteArticle = (id) => {
+    const index = articles.findIndex(a => a.id === id)
+    if (index === -1) return null
+    const deletedArticle = articles[index]
+    articles.splice(index, 1)
+    return deletedArticle
+}
 module.exports = {
-    getArticle
+    deleteArticle,
+    getAllArticles,
+    getArticle,
+    createArticle,
+    updateArticle
 }
