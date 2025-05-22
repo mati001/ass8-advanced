@@ -15,10 +15,10 @@ const articles = [{
 
 ]
 
-const getArticles = (id) => {
+const getArticle = (id) => {
     return articles.filter(article => article.id == id)[0]
 }
 
 module.exports = {
-    getArticles
+    getArticle
 }
